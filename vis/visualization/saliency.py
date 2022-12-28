@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.cm as cm
 import cv2
 
-from keras.layers.convolutional import _Conv
-from keras.layers.pooling import _Pooling1D, _Pooling2D, _Pooling3D
+from keras.layers.convolutional import Conv2D
+from keras.layers.pooling import MaxPooling1D, MaxPooling2D, AveragePooling1D, AveragePooling2D
 from keras import backend as K
 
 from ..losses import ActivationMaximization
@@ -28,7 +28,7 @@ def _find_penultimate_layer(model, layer_idx, penultimate_layer_idx):
     """
     if penultimate_layer_idx is None:
         for idx, layer in utils.reverse_enumerate(model.layers[:layer_idx - 1]):
-            if isinstance(layer, (_Conv, _Pooling1D, _Pooling2D, _Pooling3D)):
+            if isinstance(layer, (Conv2D, MaxPooling1D, MaxPooling2D, AveragePooling1D, AveragePooling2D)):
                 penultimate_layer_idx = idx
                 break
 
