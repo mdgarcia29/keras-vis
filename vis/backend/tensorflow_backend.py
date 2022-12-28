@@ -10,13 +10,14 @@ from ..utils import utils
 from tensorflow.python.framework import ops
 import keras
 from keras.models import load_model
-from keras.layers import advanced_activations, Activation
+from tensorflow.keras.layers import InputSpec
+from keras import activations, initializers, regularizers, constraints
 
 
 # Register all classes with `advanced_activations` module
 _ADVANCED_ACTIVATIONS = set()
-for name, obj in inspect.getmembers(advanced_activations, inspect.isclass):
-    if not name.startswith("_") and hasattr(obj, "__module__") and obj.__module__ == advanced_activations.__name__:
+for name, obj in inspect.getmembers(activations, inspect.isclass):
+    if not name.startswith("_") and hasattr(obj, "__module__") and obj.__module__ == activations.__name__:
         _ADVANCED_ACTIVATIONS.add(obj)
 _ADVANCED_ACTIVATIONS = tuple(_ADVANCED_ACTIVATIONS)
 
